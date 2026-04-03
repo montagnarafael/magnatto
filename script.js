@@ -63,3 +63,16 @@ document.querySelectorAll('.service-card, .info-card, .step, .stat-item').forEac
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   observer.observe(el);
 });
+
+var botaoWhats = document.getElementById('fabWhatsapp')
+
+botaoWhats.addEventListener('click', function(){
+
+  var numero = '5547988739362'
+  var mensagem = 'Olá!, vim pelo site da Magnatto e quero  mais informações!'
+
+  var url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
+  
+  window.open(url, '_blank')
+
+})
