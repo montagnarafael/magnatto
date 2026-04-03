@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contato — Magnatto Digital</title>
+  <meta name="description" content="Entre em contato com a Magnatto Digital. Atendemos pelo WhatsApp e Instagram."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.png" type="image/svg+xml"/>
+  <style>
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+    }
+    .wpp-big-card {
+      background: linear-gradient(135deg, rgba(37,211,102,0.12), rgba(37,211,102,0.04));
+      border: 1px solid rgba(37,211,102,0.25);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .wpp-big-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .wpp-big-card p {
+      font-size: 13px;
+      color: var(--white-40);
+      margin-bottom: 20px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+    .ig-card {
+      background: linear-gradient(135deg, rgba(225,48,108,0.1), rgba(193,53,132,0.05));
+      border: 1px solid rgba(225,48,108,0.2);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .ig-card:hover {
+      border-color: rgba(225,48,108,0.4);
+      transform: translateY(-2px);
+    }
+    .ig-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ig-label { font-size: 11px; color: var(--white-40); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; }
+    .ig-handle { font-size: 16px; font-weight: 600; color: var(--white); font-family: 'Syne', sans-serif; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: var(--white-40);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <img src="favicon.png" alt="logo" style="width:37px;height:37px;">
+    </div>
+    <div>
+      <div class="logo-text">Magnatto<span>Digital</span></div>
+      <div class="logo-tagline">Alta Performance Digital</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Início</a>
+    <a href="quem-somos.html">Quem Somos</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="contato.html" class="active">Contato</a>
+    <a href="#" class="nav-cta" data-wpp="">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.847L.057 23.853a.5.5 0 0 0 .609.608l6.007-1.464A11.939 11.939 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.093-1.396l-.363-.215-3.769.918.936-3.669-.236-.378A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Início</a>
+  <a href="quem-somos.html">Quem Somos</a>
+  <a href="servicos.html">Serviços</a>
+  <a href="contato.html" class="active">Contato</a>
+  <a href="#" class="mob-wpp" data-wpp="">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.847L.057 23.853a.5.5 0 0 0 .609.608l6.007-1.464A11.939 11.939 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.093-1.396l-.363-.215-3.769.918.936-3.669-.236-.378A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Falar no WhatsApp
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="section-label">Fale com a gente</div>
+  <h1>Entre em <span style="color:var(--accent)">Contato</span></h1>
+  <p>Atendemos pelo WhatsApp e Instagram. Resposta rápida, sem enrolação.</p>
+</div>
+
+<!-- CONTATO -->
+<section class="section">
+  <div class="contact-grid">
+
+    <!-- CANAIS DE CONTATO -->
+    <div>
+      <div class="section-label" style="margin-bottom:20px;">Canais de atendimento</div>
+
+      <div class="wpp-big-card">
+        <div style="font-size:40px; margin-bottom:12px;">💬</div>
+        <h3>WhatsApp — Canal principal</h3>
+        <p>A forma mais rápida de falar com a gente. Respondemos em instantes.</p>
+        <a href="#" class="btn-wpp" style="justify-content:center; width:100%; font-size:15px;" data-wpp="Olá! Vi o site da Magnatto Digital e gostaria de saber mais.">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.847L.057 23.853a.5.5 0 0 0 .609.608l6.007-1.464A11.939 11.939 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.093-1.396l-.363-.215-3.769.918.936-3.669-.236-.378A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          (47) 98873-9362 — Chamar agora
+        </a>
+      </div>
+
+      <a href="https://instagram.com/magnattodigital" target="_blank" class="ig-card">
+        <div class="ig-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <div>
+          <div class="ig-label">Instagram</div>
+          <div class="ig-handle">@magnattodigital</div>
+          <div style="font-size:12px; color:var(--white-40); margin-top:2px; font-weight:300;">Ver nosso perfil →</div>
+        </div>
+      </a>
+
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:0;">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Horário de atendimento</div>
+            <div class="contact-item-value">Segunda a Sexta, 8h às 18h <br>Sábado, 8h às 12h</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Localização</div>
+            <div class="contact-item-value">Rio do Oeste SC — Atendemos todo o Brasil</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="contact-box">
+      <div class="section-label" style="margin-bottom:20px;">Perguntas frequentes</div>
+      <div>
+        <div class="faq-item">
+          <div class="faq-q">Qual o prazo de entrega de um site?</div>
+          <div class="faq-a">Sites institucionais ficam prontos em 7 a 15 dias úteis. Landing pages em até 7 dias. O prazo depende do escopo e da agilidade na aprovação de conteúdo.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Vocês criam sites para qualquer tipo de negócio?</div>
+          <div class="faq-a">Sim! Atendemos desde profissionais autônomos, pequenos negócios, até empresas de médio porte. Cada projeto é tratado de forma personalizada.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">O site vai aparecer no Google?</div>
+          <div class="faq-a">Todo site que entregamos já vem com SEO básico configurado — títulos, descrições, velocidade e estrutura otimizados. Para resultados avançados no Google, recomendamos investimento em SEO contínuo.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">E se eu precisar alterar algo depois?</div>
+          <div class="faq-a">Oferecemos suporte pós-entrega e planos de manutenção mensal. Alterações simples de conteúdo são feitas rapidamente.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Preciso ter domínio e hospedagem?</div>
+          <div class="faq-a">Não se preocupe — cuidamos de tudo. Auxiliamos na compra do domínio e configuramos a hospedagem para você. Pode focar no seu negócio.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="logo" style="gap:10px;">
+    <div class="logo-mark">
+      <img src="favicon.png" alt="logo" style="width:32px;height:32px;">
+    </div>
+    <div class="footer-copy">© 2026 Magnatto Digital</div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="quem-somos.html">Quem Somos</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="contato.html">Contato</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

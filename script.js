@@ -1,87 +1,65 @@
-// ===== VIVEIRO CÍTRICO — script.js =====
+// ===== MAGNATTO DIGITAL — script.js =====
 
-// Número do WhatsApp (só os dígitos, com código do país)
-const WHATSAPP_NUMBER = '5547988612395'; // Substitua pelo número real
+const WPP_NUMBER = '5547988739362';
+const WPP_MSG = 'Olá! Vi o site da Magnatto Digital e gostaria de saber mais sobre os serviços de criação de sites.';
 
-// Mensagem padrão ao clicar no botão de WhatsApp
-const WPP_MESSAGE = 'Olá! Vi o site do Viveiro Cítrico e gostaria de saber mais sobre as mudas disponíveis.';
-
-// ===== WHATSAPP =====
-function abrirWhatsApp(mensagem = WPP_MESSAGE) {
-  const texto = encodeURIComponent(mensagem);
-  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${texto}`;
-  window.open(url, '_blank');
+function abrirWpp(msg = WPP_MSG) {
+  window.open(`https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-document.querySelectorAll('.wpp-btn, .wpp-big').forEach(btn => {
-  btn.addEventListener('click', (e) => {
+// Botões WhatsApp
+document.querySelectorAll('[data-wpp]').forEach(el => {
+  el.addEventListener('click', (e) => {
     e.preventDefault();
-    abrirWhatsApp();
+    const msg = el.dataset.wpp !== '' ? el.dataset.wpp : WPP_MSG;
+    abrirWpp(msg);
   });
 });
 
-document.querySelectorAll('.prod-cta').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    const nomeProduto = e.target.closest('.prod-card').querySelector('.prod-name').textContent;
-    abrirWhatsApp(`Olá! Gostaria de saber o preço e disponibilidade da muda de *${nomeProduto}*.`);
-  });
-});
-
-// ===== HAMBURGER MENU =====
+// Hamburger
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
 if (hamburger && mobileMenu) {
   hamburger.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburger.classList.toggle('open', isOpen);
-    hamburger.setAttribute('aria-expanded', isOpen);
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
   });
 
-  // Fechar ao clicar num link do menu
-  mobileMenu.querySelectorAll('a').forEach(link => {
-    if (!link.classList.contains('wpp-btn')) {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.remove('open');
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', false);
-      });
-    }
+  mobileMenu.querySelectorAll('a:not([data-wpp])').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+    });
   });
 
-  // Fechar ao clicar fora
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', e => {
     if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
       mobileMenu.classList.remove('open');
       hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', false);
     }
   });
 }
 
-// ===== NAVBAR sombra ao rolar =====
+// Navbar shadow on scroll
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('.nav');
-  if (window.scrollY > 10) {
-    nav.style.boxShadow = '0 2px 12px rgba(0,0,0,0.07)';
-  } else {
-    nav.style.boxShadow = 'none';
-  }
+  if (nav) nav.style.boxShadow = window.scrollY > 10 ? '0 2px 30px rgba(0,0,0,0.4)' : 'none';
 });
 
-// ===== ANIMAÇÃO de entrada nos cards (Intersection Observer) =====
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
+// Fade-in animation
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.08 });
 
-document.querySelectorAll('.cat-card, .prod-card, .test-card').forEach(card => {
-  card.style.opacity = '0';
-  card.style.transform = 'translateY(16px)';
-  card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-  observer.observe(card);
+document.querySelectorAll('.service-card, .info-card, .step, .stat-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(18px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
 });
