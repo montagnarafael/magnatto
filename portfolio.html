@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfólio — Magnatto Digital</title>
+  <meta name="description" content="Conheça os projetos desenvolvidos pela Magnatto Digital. Sites profissionais que geram resultados."/>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="icon" href="favicon.png" type="image/svg+xml"/>
+  <style>
+
+    /* ===== PORTFOLIO GRID ===== */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    .portfolio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .portfolio-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+    }
+
+    /* Mockup preview area */
+    .portfolio-preview {
+      height: 200px;
+      position: relative;
+      overflow: hidden;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Animated gradient bg for preview */
+    .portfolio-preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--preview-bg, linear-gradient(135deg, rgba(0,194,255,0.08), rgba(0,60,120,0.12)));
+      z-index: 0;
+    }
+
+    /* Fake browser chrome */
+    .browser-chrome {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .browser-bar {
+      background: rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .browser-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .browser-dot.red { background: rgba(255,95,87,0.6); }
+    .browser-dot.yellow { background: rgba(255,189,68,0.6); }
+    .browser-dot.green { background: rgba(39,201,63,0.6); }
+
+    .browser-url {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 5px;
+      padding: 4px 10px;
+      font-size: 10px;
+      color: var(--white-40);
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .browser-url svg {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    .browser-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* Decorative site sketch inside preview */
+    .site-sketch {
+      width: 90%;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .sketch-header {
+      height: 14px;
+      background: rgba(0,194,255,0.15);
+      border-radius: 4px;
+      width: 60%;
+    }
+
+    .sketch-hero {
+      height: 36px;
+      background: rgba(0,194,255,0.08);
+      border-radius: 6px;
+    }
+
+    .sketch-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .sketch-block {
+      height: 22px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 4px;
+      flex: 1;
+    }
+
+    .sketch-block.accent {
+      background: rgba(0,194,255,0.1);
+      max-width: 40%;
+    }
+
+    /* Category badge on preview */
+    .preview-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 3;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .badge-site {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(0,194,255,0.2);
+    }
+
+    .badge-landing {
+      background: rgba(240,180,41,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(240,180,41,0.2);
+    }
+
+    /* Card body */
+    .portfolio-body {
+      padding: 22px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .portfolio-segment {
+      font-size: 11px;
+      color: var(--white-40);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 500;
+    }
+
+    .portfolio-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.3px;
+    }
+
+    .portfolio-desc {
+      font-size: 13px;
+      color: var(--white-40);
+      line-height: 1.65;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    /* Tags */
+    .portfolio-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .ptag {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: var(--white-10);
+      color: var(--white-40);
+      border: 1px solid var(--border);
+    }
+
+    /* Footer of card */
+    .portfolio-footer {
+      padding: 14px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .portfolio-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: rgba(39,201,63,0.85);
+      font-weight: 500;
+    }
+
+    .portfolio-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #27c93f;
+      display: block;
+    }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 7px;
+      border: 1px solid rgba(0,194,255,0.2);
+      background: var(--accent-dim);
+      transition: all 0.2s;
+    }
+
+    .portfolio-link:hover {
+      background: rgba(0,194,255,0.2);
+      border-color: rgba(0,194,255,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* ===== STATS MINI ROW ===== */
+    .portfolio-stats {
+      display: flex;
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+
+    .ps-item {
+      flex: 1;
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .ps-item:last-child { border-right: none; }
+
+    .ps-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -1px;
+    }
+
+    .ps-label {
+      font-size: 12px;
+      color: var(--white-40);
+      font-weight: 300;
+      margin-top: 2px;
+    }
+
+    /* ===== FILTER BAR ===== */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--white-40);
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--white-70);
+    }
+
+    .filter-btn.active {
+      background: var(--accent-dim);
+      border-color: rgba(0,194,255,0.3);
+      color: var(--accent);
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .coming-soon-card {
+      background: var(--surface);
+      border: 1px dashed rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 48px 32px;
+      text-align: center;
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .coming-soon-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--accent-dim);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .coming-soon-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .coming-soon-card p {
+      font-size: 13px;
+      color: var(--white-40);
+      font-weight: 300;
+      max-width: 320px;
+      line-height: 1.65;
+    }
+
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-stats { flex-wrap: wrap; }
+      .ps-item { flex: 0 0 50%; border-bottom: 1px solid var(--border); }
+      .ps-item:nth-child(2n) { border-right: none; }
+      .ps-item:nth-last-child(-n+2) { border-bottom: none; }
+    }
+
+
+.imagens {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    object-position: top;
+}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="nav">
+  <a href="index.html" class="logo">
+    <div class="logo-mark">
+      <img src="favicon.png" alt="logo" style="width:37px;height:37px;">
+    </div>
+    <div>
+      <div class="logo-text">Magnatto<span>Digital</span></div>
+      <div class="logo-tagline">Alta Performance Digital</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Início</a>
+    <a href="quem-somos.html">Quem Somos</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="portfolio.html" class="active">Portfólio</a>
+    <a href="contato.html">Contato</a>
+    <a href="#" class="nav-cta" data-wpp="">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.847L.057 23.853a.5.5 0 0 0 .609.608l6.007-1.464A11.939 11.939 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.093-1.396l-.363-.215-3.769.918.936-3.669-.236-.378A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Início</a>
+  <a href="quem-somos.html">Quem Somos</a>
+  <a href="servicos.html">Serviços</a>
+  <a href="portfolio.html" class="active">Portfólio</a>
+  <a href="contato.html">Contato</a>
+  <a href="#" class="mob-wpp" data-wpp="">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.847L.057 23.853a.5.5 0 0 0 .609.608l6.007-1.464A11.939 11.939 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.093-1.396l-.363-.215-3.769.918.936-3.669-.236-.378A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Falar no WhatsApp
+  </a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-glow"></div>
+  <div class="section-label">Trabalhos realizados</div>
+  <h1>Nosso <span style="color:var(--accent)">Portfólio</span></h1>
+  <p>Sites entregues, clientes satisfeitos e resultados reais. Cada projeto tem uma história — conheça alguns deles.</p>
+</div>
+
+<!-- PORTFOLIO SECTION -->
+<section class="section">
+
+  <!-- MINI STATS -->
+  <div class="portfolio-stats">
+    <div class="ps-item">
+      <div class="ps-num" id="count-projects">0</div>
+      <div class="ps-label">Projetos entregues</div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-num">100%</div>
+      <div class="ps-label">Clientes satisfeitos</div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-num">100%</div>
+      <div class="ps-label">Mobile-first</div>
+    </div>
+    <div class="ps-item">
+      <div class="ps-num">SC+</div>
+      <div class="ps-label">Brasil todo</div>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="site">Site Institucional</button>
+    <button class="filter-btn" data-filter="landing">Landing Page</button>
+  </div>
+
+  <!-- GRID -->
+  <div class="portfolio-grid" id="portfolioGrid">
+
+    <!-- =============================================
+         ADICIONE / EDITE SEUS PROJETOS AQUI ABAIXO
+         Copie um bloco .portfolio-card e preencha:
+           data-category = "site" ou "landing"
+           .portfolio-segment = segmento do cliente
+           .portfolio-name = nome do projeto/cliente
+           .portfolio-desc = breve descrição
+           .ptag = tecnologias / características
+           href no .portfolio-link = link do site
+    ============================================== -->
+
+    <!-- PROJETO 1 — substitua com seus dados reais -->
+    <div class="portfolio-card" data-category="site">
+      <div class="portfolio-preview" style="--preview-bg: linear-gradient(135deg, rgba(0,194,255,0.10), rgba(0,60,140,0.14));">
+        <img src="img/exellerkids.png" alt="exellerkids" class="imagens">
+        
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-segment">Aluguel e Venda de Brinquedos Infláveis</div>
+        <div class="portfolio-name">Eller Kids</div>
+        <div class="portfolio-desc">O objetivo foi criar uma presença digital moderna e confiável, facilitando o contato via WhatsApp e aumentando a conversão de visitantes em clientes.</div>
+        <div class="portfolio-tags">
+          <span class="ptag">HTML/CSS</span>
+          <span class="ptag">Javascript</span>
+          <span class="ptag">SEO</span>
+          <span class="ptag">Mobile-First</span>
+          <span class="ptag">WhatsApp</span>
+        </div>
+      </div>
+      <div class="portfolio-footer">
+        <span class="portfolio-status">No ar</span>
+        <a href="https://eller-kids.vercel.app/" target="_blank" rel="noopener" class="portfolio-link">
+          Ver site
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- PROJETO 2 -->
+    <div class="portfolio-card" data-category="landing">
+      <div class="portfolio-preview" style="--preview-bg: linear-gradient(135deg, rgba(240,180,41,0.10), rgba(180,100,0,0.10));">
+       <img src="img/exsavio.png" alt="exsavio" class="imagens">
+      
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-segment">Viveiro de Mudas Cítricas</div>
+        <div class="portfolio-name">Viveiro Sávio Giacomozzi</div>
+        <div class="portfolio-desc">O projeto consistiu no desenvolvimento de um website institucional e catálogo digital, focado em transformar a presença física do viveiro em uma vitrine online profissional..</div>
+        <div class="portfolio-tags">
+          <span class="ptag">Landing Page</span>
+          <span class="ptag">WhatsApp CTA</span>
+          <span class="ptag">Alta conversão</span>
+          <span class="ptag">Catálogo</span>
+          <span class="ptag">WhatsApp</span>
+        </div>
+      </div>
+      <div class="portfolio-footer">
+        <span class="portfolio-status">No ar</span>
+        <a href="https://viveiro-savio-giacomozzi.vercel.app/" target="_blank" rel="noopener" class="portfolio-link">
+          Ver site
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- PROJETO 3 -->
+    <div class="portfolio-card" data-category="site">
+      <div class="portfolio-preview" style="--preview-bg: linear-gradient(135deg, rgba(37,211,102,0.09), rgba(0,80,40,0.12));">
+        <img src="img/exmagnatto.png" alt="exmagnatto" class="imagens">
+        
+      </div>
+      <div class="portfolio-body">
+        <div class="portfolio-segment">Site Completo</div>
+        <div class="portfolio-name">Magnatto Digital</div>
+        <div class="portfolio-desc">Site completo desenvolvido para o público conhecer o trabalho da Magnatto Digital, além de deixar visível a qualidade técnica.</div>
+        <div class="portfolio-tags">
+          <span class="ptag">HTML/CSS</span>
+          <span class="ptag">Javascript</span>
+          <span class="ptag">SEO</span>
+          <span class="ptag">WhatsApp</span>
+        </div>
+      </div>
+      <div class="portfolio-footer">
+        <span class="portfolio-status">No ar</span>
+        <a href="https://www.magnattodigital.com.br/" target="_blank" rel="noopener" class="portfolio-link">
+          Ver site
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- CARD "EM BREVE" — aparece quando filtro não tem resultados, ou mantenha como espaço reservado -->
+    <div class="coming-soon-card" id="emBreveCard" style="display:none;">
+      <div class="coming-soon-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h3>Novos projetos chegando</h3>
+      <p>Estamos sempre trabalhando em novos projetos. Volte em breve para conferir!</p>
+      <a href="https://www.magnattodigital.com.br" target="_blank" class="btn-ghost" style="margin-top:8px;" data-wpp="Olá! Vi o portfólio da Magnatto Digital e quero solicitar um orçamento.">Quero meu site →</a>
+    </div>
+
+  </div>
+  <!-- FIM DO GRID -->
+
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div class="cta-strip-glow"></div>
+  <div class="section-label" style="justify-content:center; display:flex;">Seu negócio pode ser o próximo</div>
+  <h2>Quer um site como esses<br>para sua empresa?</h2>
+  <p>Solicite um orçamento agora e descubra como podemos transformar sua presença digital.</p>
+  <a href="https://wa.me/5547988739362" target="_blank" class="btn-wpp" data-wpp="Olá! Vi o portfólio da Magnatto Digital e quero solicitar um orçamento para o meu site.">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.522 5.847L.057 23.853a.5.5 0 0 0 .609.608l6.007-1.464A11.939 11.939 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.952 9.952 0 0 1-5.093-1.396l-.363-.215-3.769.918.936-3.669-.236-.378A9.952 9.952 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Solicitar orçamento agora
+  </a>
+</div>
+
+<!-- botao de whatsapp no canto inferior -->
+<a href="#" class="fab-whatsapp" id="fabWhatsapp" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.115.549 4.099 1.51 5.824L.036 23.145a.75.75 0 0 0 .916.898l5.424-1.419A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.854 0-3.6-.5-5.105-1.373l-.367-.214-3.214.84.875-3.131-.232-.381A9.956 9.956 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    <span class="fab-whatsapp__tooltip">Fale conosco!</span>
+</a>
+<!-- FOOTER -->
+<footer>
+  <div class="logo" style="gap:10px;">
+    <div class="logo-mark">
+      <img src="favicon.png" alt="logo" style="width:32px;height:32px;">
+    </div>
+    <div class="footer-copy">© 2026 Magnatto Digital |
+      <a href="politicadeprivacidade.html" class="politica">Política De Privacidade</a>
+    </div>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="quem-somos.html">Quem Somos</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="portfolio.html">Portfólio</a>
+    <a href="contato.html">Contato</a>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  // ===== FILTRO DE PORTFOLIO =====
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.portfolio-card[data-category]');
+  const emBreveCard = document.getElementById('emBreveCard');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      let visible = 0;
+
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+
+      emBreveCard.style.display = visible === 0 ? '' : 'none';
+    });
+  });
+
+  // ===== CONTADOR ANIMADO =====
+  function animateCount(el, target, duration = 1200) {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 16));
+    const timer = setInterval(() => {
+      start = Math.min(start + step, target);
+      el.textContent = start + '+';
+      if (start >= target) {
+        el.textContent = target + '+';
+        clearInterval(timer);
+      }
+    }, 16);
+  }
+
+  const countEl = document.getElementById('count-projects');
+  const totalProjects = document.querySelectorAll('.portfolio-card[data-category]').length;
+  
+  // Observa quando entra na tela para disparar animação
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(countEl, totalProjects);
+        countObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  countObserver.observe(countEl);
+</script>
+</body>
+</html>

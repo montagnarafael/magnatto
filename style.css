@@ -10,7 +10,7 @@
   --border-hover: rgba(255,255,255,0.15);
   --white: #FFFFFF;
   --white-70: rgba(255,255,255,0.7);
-  --white-40: rgba(255,255,255,0.4);
+  --white-40: rgba(255, 255, 255, 0.886);
   --white-10: rgba(255,255,255,0.06);
   --accent: #00C2FF;
   --accent-dim: rgba(0,194,255,0.12);
@@ -279,6 +279,7 @@ body::before {
   gap: 12px;
   justify-content: center;
   flex-wrap: wrap;
+  
 }
 
 .btn-primary {
@@ -374,6 +375,7 @@ body::before {
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
+  
 }
 
 .stat-label {
