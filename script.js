@@ -1,7 +1,7 @@
 // ===== MAGNATTO DIGITAL — script.js =====
 
 const WPP_NUMBER = '5547988739362';
-const WPP_MSG = 'Olá! Vi o site da Magnatto Digital e gostaria de saber mais sobre os serviços de criação de sites.';
+const WPP_MSG = 'Olá! Vi o site da Magnatto Digital e gostaria de um orçamento para o meu segmento de negócios!';
 
 function abrirWpp(msg = WPP_MSG) {
   window.open(`https://wa.me/${WPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -69,7 +69,7 @@ var botaoWhats = document.getElementById('fabWhatsapp')
 botaoWhats.addEventListener('click', function(){
 
   var numero = '5547988739362'
-  var mensagem = 'Olá!, vim pelo site da Magnatto e quero  mais informações!'
+  var mensagem = 'Olá!, quero um orçamento de website para o meu negócio!'
 
   var url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`
   
